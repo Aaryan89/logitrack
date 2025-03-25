@@ -10,40 +10,4 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-  
-  .dark .text-muted-foreground {
-    @apply text-gray-400;
-  }
-  
-  .dark a {
-    @apply text-blue-400 hover:text-blue-300;
-  }
-  
-  .dark .bg-primary\/5 {
-    @apply bg-primary/10;
-  }
-  
-  .dark .border-primary {
-    @apply border-primary/60;
-  }
-  
-  .dark label {
-    @apply text-gray-300;
-  }
-  
-  .dark input {
-    @apply border-gray-700 bg-gray-800 text-white placeholder:text-gray-500;
-  }
-  
-  .dark .bg-background {
-    @apply bg-gray-800;
-  }
-  
-  .dark button[disabled] {
-    @apply opacity-50 bg-gray-700 text-gray-400;
-  }
-  
-  .dark button:not([disabled]) {
-    @apply text-white;
-  }
 }

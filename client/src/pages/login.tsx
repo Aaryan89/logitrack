@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
-import { ThemeToggle } from "../components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -24,15 +23,14 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
-      <Card className="w-full max-w-md dark:border-gray-700">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+      <Card className="w-full max-w-md">
         <CardContent className="pt-6">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-bold text-primary dark:text-blue-400">LogiTrack</h1>
-            <ThemeToggle />
+          <div className="flex justify-center items-center mb-6">
+            <h1 className="text-3xl font-bold text-primary">LogiTrack</h1>
           </div>
           
-          <h2 className="text-2xl font-semibold mb-6 text-center dark:text-white">Login to your account</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-center">Login to your account</h2>
           
           {!showRoleSelection ? (
             <>
@@ -114,22 +112,22 @@ export default function Login() {
                 <Button
                   variant="outline"
                   onClick={() => handleRoleSelect("driver")}
-                  className="flex flex-col items-center justify-center p-8 border-2 border-primary bg-primary/5 hover:bg-primary/10 dark:text-white dark:hover:bg-primary/20"
+                  className="flex flex-col items-center justify-center p-8 border-2 border-primary bg-primary/5 hover:bg-primary/10"
                 >
-                  <Truck className="h-10 w-10 mb-2 text-primary dark:text-blue-400" />
+                  <Truck className="h-10 w-10 mb-2 text-primary" />
                   <span className="font-medium">Driver</span>
                 </Button>
                 
                 <Button
                   variant="outline"
                   onClick={() => handleRoleSelect("manager")}
-                  className="flex flex-col items-center justify-center p-8 border-2 border-primary bg-primary/5 hover:bg-primary/10 dark:text-white dark:hover:bg-primary/20"
+                  className="flex flex-col items-center justify-center p-8 border-2 border-primary bg-primary/5 hover:bg-primary/10"
                 >
-                  <Warehouse className="h-10 w-10 mb-2 text-primary dark:text-blue-400" />
+                  <Warehouse className="h-10 w-10 mb-2 text-primary" />
                   <span className="font-medium">Inventory Manager</span>
                 </Button>
               </div>
-              <p className="text-xs text-muted-foreground text-center mt-4 dark:text-gray-300">
+              <p className="text-xs text-muted-foreground text-center mt-4">
                 Note: Your role cannot be changed after selection.
               </p>
             </div>
