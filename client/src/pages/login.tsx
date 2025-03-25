@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -9,6 +10,7 @@ import { Loader2, Truck, Warehouse } from "lucide-react";
 
 export default function Login() {
   const { user, loading, signInWithGoogle, setUserRole } = useAuth();
+  const [, navigate] = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showRoleSelection, setShowRoleSelection] = useState(false);
@@ -20,6 +22,12 @@ export default function Login() {
 
   const handleRoleSelect = (role: "driver" | "manager") => {
     setUserRole(role);
+    // Navigate to the appropriate dashboard based on role
+    if (role === "driver") {
+      navigate("/driver/dashboard");
+    } else {
+      navigate("/manager/dashboard");
+    }
   };
 
   return (
