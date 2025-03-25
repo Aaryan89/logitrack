@@ -435,6 +435,199 @@ export default function ManagerEmails() {
         </DialogContent>
       </Dialog>
       
+      {/* AI Analysis Results */}
+      {showAIResults && organizedEmails && (
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Wand2 className="mr-2 h-5 w-5 text-primary" />
+              Gemini AI Email Analysis
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Tabs defaultValue="urgent" className="w-full">
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="urgent" className="flex items-center">
+                  <AlertTriangle className="mr-2 h-4 w-4 text-red-500" />
+                  Urgent ({organizedEmails.urgent.length})
+                </TabsTrigger>
+                <TabsTrigger value="changed_route" className="flex items-center">
+                  <MoveRight className="mr-2 h-4 w-4 text-blue-500" />
+                  Changed Routes ({organizedEmails.changed_route.length})
+                </TabsTrigger>
+                <TabsTrigger value="problems" className="flex items-center">
+                  <ShieldAlert className="mr-2 h-4 w-4 text-orange-500" />
+                  Problems ({organizedEmails.problems.length})
+                </TabsTrigger>
+                <TabsTrigger value="other" className="flex items-center">
+                  <MessageSquare className="mr-2 h-4 w-4 text-green-500" />
+                  Other ({organizedEmails.other.length})
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="urgent" className="border rounded-md mt-6">
+                {organizedEmails.urgent.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Sender</TableHead>
+                        <TableHead>Subject</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>AI Analysis</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {organizedEmails.urgent.map((email, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">{email.sender}</TableCell>
+                          <TableCell>
+                            <span className="flex items-start">
+                              <AlertTriangle className="h-4 w-4 text-red-500 mr-2 mt-0.5 shrink-0" />
+                              {email.subject}
+                            </span>
+                          </TableCell>
+                          <TableCell>{email.date}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200">
+                              Requires immediate attention
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <div className="py-8 text-center text-muted-foreground">
+                    No urgent emails found
+                  </div>
+                )}
+              </TabsContent>
+              
+              <TabsContent value="changed_route" className="border rounded-md mt-6">
+                {organizedEmails.changed_route.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Sender</TableHead>
+                        <TableHead>Subject</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>AI Analysis</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {organizedEmails.changed_route.map((email, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">{email.sender}</TableCell>
+                          <TableCell>
+                            <span className="flex items-start">
+                              <MapPin className="h-4 w-4 text-blue-500 mr-2 mt-0.5 shrink-0" />
+                              {email.subject}
+                            </span>
+                          </TableCell>
+                          <TableCell>{email.date}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200">
+                              Route change required
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <div className="py-8 text-center text-muted-foreground">
+                    No route change emails found
+                  </div>
+                )}
+              </TabsContent>
+              
+              <TabsContent value="problems" className="border rounded-md mt-6">
+                {organizedEmails.problems.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Sender</TableHead>
+                        <TableHead>Subject</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>AI Analysis</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {organizedEmails.problems.map((email, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">{email.sender}</TableCell>
+                          <TableCell>
+                            <span className="flex items-start">
+                              <FileWarning className="h-4 w-4 text-orange-500 mr-2 mt-0.5 shrink-0" />
+                              {email.subject}
+                            </span>
+                          </TableCell>
+                          <TableCell>{email.date}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-200">
+                              Issue needs resolution
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <div className="py-8 text-center text-muted-foreground">
+                    No problem emails found
+                  </div>
+                )}
+              </TabsContent>
+              
+              <TabsContent value="other" className="border rounded-md mt-6">
+                {organizedEmails.other.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Sender</TableHead>
+                        <TableHead>Subject</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>AI Analysis</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {organizedEmails.other.map((email, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">{email.sender}</TableCell>
+                          <TableCell>{email.subject}</TableCell>
+                          <TableCell>{email.date}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200">
+                              Standard priority
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <div className="py-8 text-center text-muted-foreground">
+                    No other emails found
+                  </div>
+                )}
+              </TabsContent>
+            </Tabs>
+            
+            <div className="mt-4 flex justify-end">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowAIResults(false)}
+                className="flex items-center"
+              >
+                <XCircle className="h-4 w-4 mr-2" />
+                Hide AI Analysis
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+      
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Email Sidebar */}
         <Card className="md:col-span-1">
