@@ -122,12 +122,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const setUserRole = (role: UserRole) => {
+    console.log("Setting user role:", role);
     if (user) {
+      // Update user object with role
       const updatedUser = { ...user, role };
+      
+      // Store role and user in localStorage
       localStorage.setItem(`role_${user.uid}`, role);
       localStorage.setItem("user", JSON.stringify(updatedUser));
+      
+      // Update state
       setUser(updatedUser);
-      navigate(`/${role}/dashboard`);
+      
+      console.log("User role set to:", role);
+      console.log("Updated user:", updatedUser);
+      
+      // Navigation is handled in the component that calls this function
+    } else {
+      console.error("Cannot set role: User is not authenticated");
     }
   };
 

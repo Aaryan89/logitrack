@@ -21,13 +21,20 @@ export default function Login() {
   };
 
   const handleRoleSelect = (role: "driver" | "manager") => {
+    // Set the user role first
     setUserRole(role);
-    // Navigate to the appropriate dashboard based on role
-    if (role === "driver") {
-      navigate("/driver/dashboard");
-    } else {
-      navigate("/manager/dashboard");
-    }
+    
+    // Let the auth context handle navigation
+    console.log(`Role selected: ${role}, redirecting to /${role}/dashboard`);
+    
+    // Force a navigation to the appropriate dashboard
+    setTimeout(() => {
+      if (role === "driver") {
+        window.location.href = "/driver/dashboard";
+      } else {
+        window.location.href = "/manager/dashboard";
+      }
+    }, 100);
   };
 
   return (
