@@ -1,0 +1,15 @@
+I want to make a dynamic website for this which would somehow look like a Zomato app so to explain it in detail it is a website that would give you option to login through google and etc and create a profile then they get to choose first they are a driver or a inventory manager which info is very important and cannot be changed after selected these details are saved and whenever they open the site they are given are kept logged in.
+
+in the driver profile we need to create a section where they can know what do they have in their tucks and where to deliver them with the help of google idx's gemini and google maps api we can use gemini to create a proper structure of which path to take and where which parcel should be delivered and where a petrol or charging or rest station is for the driver to know and with help of google maps api we can display all these information.
+
+in the store manager profile we use gemini to keep a track of inventory in which truck where a product should go in a truck which products are in route which are kept in storage which we are yet  which suggest and track driver routes, suggest better alternatives and deadlines for things that may expire. Gemini would send updates regularly with the help of tracking through googles map api. another feature is that with the help of an Gemini AI powered email organiser can create a proper structure about emails like reached for reached packages, switch for switched path, problems for queries and etc.
+
+a section to display calender with help of gemini we can add a proper schedule of trucks and everything
+
+suggest we how should i make this using google idx and google workspace
+also give an option to manage inventory that is to add a product increase in the number delete a product this should be in the inventory selection only
+also a method to add manage deadlines
+
+Let there also be an option to have light and dark theme.
+
+Also let the areas where I need to link api have a comment wherever I need to add or update
