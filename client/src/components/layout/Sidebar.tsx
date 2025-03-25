@@ -43,8 +43,8 @@ export default function Sidebar({ isOpen, setIsOpen, isMobile }: SidebarProps) {
   const linkClass = (path: string) => {
     return `flex items-center px-3 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors ${
       isActive(path)
-        ? "bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400"
-        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+        ? "bg-primary-50 text-primary-600"
+        : "text-gray-700 hover:bg-gray-100"
     }`;
   };
 
@@ -76,7 +76,7 @@ export default function Sidebar({ isOpen, setIsOpen, isMobile }: SidebarProps) {
 
   // Sidebar classNames
   const sidebarClass = `
-    bg-white dark:bg-gray-800 
+    bg-white
     ${isOpen ? "w-64" : "w-0 md:w-20"} 
     fixed md:sticky top-16 
     h-[calc(100vh-4rem)] 
@@ -103,8 +103,8 @@ export default function Sidebar({ isOpen, setIsOpen, isMobile }: SidebarProps) {
       <aside className={sidebarClass}>
         <ScrollArea>
           <div className="py-4 px-3">
-            <div className="px-2 py-4 mb-2 border-b border-gray-200 dark:border-gray-700">
-              <div className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+            <div className="px-2 py-4 mb-2 border-b border-gray-200">
+              <div className="text-sm font-medium text-gray-500 uppercase">
                 {user?.role === "manager" ? "Manager Portal" : "Driver Portal"}
               </div>
             </div>
@@ -122,7 +122,7 @@ export default function Sidebar({ isOpen, setIsOpen, isMobile }: SidebarProps) {
               ))}
             </nav>
             
-            <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="mt-8 pt-4 border-t border-gray-200">
               <nav className="space-y-1">
                 {commonLinks.map((link) => (
                   <a

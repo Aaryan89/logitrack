@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { useAuth } from "../../context/auth-context";
 import Sidebar from "./Sidebar";
-import { ThemeToggle } from "../ui/theme-toggle";
 import { 
   LogOut, 
   Bell, 
@@ -59,9 +58,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Top Navigation Bar */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-gray-800 shadow-sm z-30">
+      <header className="fixed top-0 left-0 right-0 h-16 bg-white shadow-sm z-30">
         <div className="flex items-center justify-between h-full px-4">
           <div className="flex items-center">
             <Button 
@@ -77,11 +76,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
           </div>
           
           <div className="flex items-center space-x-2">
-            <ThemeToggle />
-            
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
-              <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-gray-800"></span>
+              <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
             </Button>
             
             <div className="flex items-center space-x-3 ml-2">
@@ -92,7 +89,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
               
               <div className="hidden md:block">
                 <p className="text-sm font-medium">{user.displayName}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{user.role}</p>
+                <p className="text-xs text-gray-500 capitalize">{user.role}</p>
               </div>
             </div>
             
