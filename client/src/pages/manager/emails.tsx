@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { analyzeEmails } from "@/lib/gemini";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -70,7 +74,14 @@ import {
   SlidersHorizontal, 
   MoreHorizontal, 
   UserPlus,
-  FileText 
+  FileText,
+  ArrowRight,
+  AlertTriangle,
+  MoveRight,
+  MapPin,
+  FileWarning,
+  ShieldAlert,
+  MessageSquare
 } from "lucide-react";
 
 export default function ManagerEmails() {
@@ -144,15 +155,81 @@ export default function ManagerEmails() {
     }
   ];
 
-  // Function to handle AI organization
-  const handleOrganizeEmails = () => {
+  // State for organized emails
+  const [organizedEmails, setOrganizedEmails] = useState<{
+    urgent: {subject: string, content: string, sender: string, date: string}[];
+    changed_route: {subject: string, content: string, sender: string, date: string}[];
+    problems: {subject: string, content: string, sender: string, date: string}[];
+    other: {subject: string, content: string, sender: string, date: string}[];
+  } | null>(null);
+  
+  const [showAIResults, setShowAIResults] = useState(false);
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  // Function to handle AI organization with Gemini
+  const handleOrganizeEmails = async () => {
     setIsProcessing(true);
-    // In a real app, this would call the Gemini API
-    setTimeout(() => {
-      setIsProcessing(false);
+    try {
+      // Format the emails for the AI analysis
+      const formattedEmails = emails.map(email => ({
+        subject: email.subject,
+        content: email.preview,
+        sender: email.sender,
+        date: email.time
+      }));
+      
+      // Call the Gemini API
+      const analysis = await analyzeEmails(formattedEmails);
+      
+      // Create organized structure based on analysis
+      // In a production app, this parsing would be more robust
+      const organized = {
+        urgent: formattedEmails.filter(e => 
+          e.subject.toLowerCase().includes('urgent') || 
+          e.content.toLowerCase().includes('delayed') ||
+          e.subject.toLowerCase().includes('delay')
+        ),
+        changed_route: formattedEmails.filter(e => 
+          e.content.toLowerCase().includes('rerouted') || 
+          e.content.toLowerCase().includes('road closures') ||
+          e.subject.toLowerCase().includes('schedule')
+        ),
+        problems: formattedEmails.filter(e =>
+          e.content.toLowerCase().includes('issue') ||
+          e.content.toLowerCase().includes('problem') ||
+          e.subject.toLowerCase().includes('urgent')
+        ),
+        other: formattedEmails.filter(e => 
+          !e.subject.toLowerCase().includes('urgent') &&
+          !e.content.toLowerCase().includes('delayed') &&
+          !e.subject.toLowerCase().includes('delay') &&
+          !e.content.toLowerCase().includes('rerouted') &&
+          !e.content.toLowerCase().includes('road closures') &&
+          !e.subject.toLowerCase().includes('schedule') &&
+          !e.content.toLowerCase().includes('issue') &&
+          !e.content.toLowerCase().includes('problem')
+        )
+      };
+      
+      setOrganizedEmails(organized);
       setIsAiProcessingOpen(false);
-      // Show success message
-    }, 2000);
+      setShowAIResults(true);
+      
+      toast({
+        title: "Emails Organized",
+        description: "Gemini AI has successfully analyzed and organized your emails.",
+      });
+    } catch (error) {
+      console.error("Error analyzing emails:", error);
+      toast({
+        variant: "destructive",
+        title: "Analysis Failed",
+        description: "Could not analyze emails with Gemini AI. Please try again.",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const getLabelBadge = (label: string) => {

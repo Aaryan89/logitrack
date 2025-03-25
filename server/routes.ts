@@ -58,7 +58,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Package routes
   app.get("/api/packages", async (req, res) => {
     try {
-      const packages = await storage.getAllPackages();
+      const packages = await storage.getPackages();
       res.json(packages);
     } catch (error) {
       console.error("Error fetching packages:", error);
@@ -130,7 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Truck routes
   app.get("/api/trucks", async (req, res) => {
     try {
-      const trucks = await storage.getAllTrucks();
+      const trucks = await storage.getTrucks();
       res.json(trucks);
     } catch (error) {
       console.error("Error fetching trucks:", error);
@@ -207,7 +207,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Inventory routes
   app.get("/api/inventory", async (req, res) => {
     try {
-      const inventory = await storage.getAllInventory();
+      const inventory = await storage.getInventory();
       res.json(inventory);
     } catch (error) {
       console.error("Error fetching inventory:", error);
@@ -294,7 +294,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Route routes
   app.get("/api/routes", async (req, res) => {
     try {
-      const routes = await storage.getAllRoutes();
+      const routes = await storage.getRoutes();
       res.json(routes);
     } catch (error) {
       console.error("Error fetching routes:", error);
@@ -392,7 +392,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Event routes
   app.get("/api/events", async (req, res) => {
     try {
-      const events = await storage.getAllEvents();
+      const events = await storage.getEvents();
       res.json(events);
     } catch (error) {
       console.error("Error fetching events:", error);
