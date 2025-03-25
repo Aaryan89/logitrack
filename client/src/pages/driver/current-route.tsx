@@ -9,7 +9,7 @@ import {
   Minus, 
   Phone, 
   Navigation,
-  GasPump,
+  Fuel,
   Utensils
 } from "lucide-react";
 
@@ -94,7 +94,7 @@ export default function DriverCurrentRoute() {
             {/* Fuel Stations */}
             <div>
               <h3 className="font-medium mb-3 flex items-center">
-                <GasPump className="text-yellow-500 mr-2 h-5 w-5" />
+                <Fuel className="text-yellow-500 mr-2 h-5 w-5" />
                 Fuel Stations
               </h3>
               <div className="space-y-3">
